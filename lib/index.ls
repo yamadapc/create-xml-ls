@@ -6,10 +6,17 @@
  * Licensed under the MIT license.
 */
 
+## Dependencies
 _ = require \underscore
+{Document} = require \libxmljs
 
-{Document, Element} = require \libxmljs
-
+##
+# set-node :: Document -> value -> String -> Document
+#
+# Sets a root element's nested tag based on a key and a value.
+# Optionally, if the value is an object and it has an $attr property, its
+# respective tag's attributes will be unpacked from this property
+#
 set-node = (root, value, key) -->
   new-root = root.node key, value
 
@@ -21,6 +28,11 @@ set-node = (root, value, key) -->
 
   root
 
+##
+# create-xml :: obj, options -> String
+#
+# Recursively creates an libxmljs Document based on an object
+#
 create-xml = (obj, options) ->
   if (_.size _.keys obj) > 1
     throw new Error 'There must be only one root element'
