@@ -20,7 +20,7 @@ describe 'create-xml', ->
 
   describe 'when passing a root element', ->
     describe 'with simple child key value pairs', ->
-      doc = new Document!
+      doc = new Document '1.2.1'
       doc.node 'root'
         .node 'foo', 'x' .parent!
         .node 'bar', 'y'
@@ -28,7 +28,7 @@ describe 'create-xml', ->
       input = root: { foo: 'x', bar: 'y' }
 
       o 'should return the right output', ->
-        result = create-xml input, pretty: true
+        result = create-xml input, pretty: true, version: '1.2.1'
         result.should.equal expected
 
     describe 'with complex nested objects', ->
