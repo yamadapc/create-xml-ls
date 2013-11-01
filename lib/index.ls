@@ -12,8 +12,10 @@ _ = require \underscore
 
 set-node = (root, value, key) -->
   new-root = root.node key, value
-            ..attr value?attr
 
+  if value?$attr
+    _.each value.$attr, (value, param) -> new-root.attr param, value
+    delete value.$attr
   if value instanceof Object
     _.each value, (set-node new-root)
 
