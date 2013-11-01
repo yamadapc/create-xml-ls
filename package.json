@@ -1,6 +1,6 @@
 {
     "name":         "create-xml-ls",
-    "version":      "0.0.2",
+    "version":      "0.0.3",
     "description":  "Another JS object to XML converter",
     "author":       "Pedro Tacla Yamada <tacla.yamada@gmail.com>",
     "main":         "./pub/index",
