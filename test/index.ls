@@ -3,8 +3,9 @@ o = it # alias mocha's 'it' to o
 # Dependencies
 #
 require! should
-_ = require \underscore
+_          = require \underscore
 create-xml = require \..
+{Document} = require \libxmljs
 
 ##
 # Tests
@@ -19,23 +20,37 @@ describe 'create-xml', ->
 
   describe 'when passing a root element', ->
     describe 'with simple child key value pairs', ->
-      expected = [
-        '<?xml version="1.0" encoding="UTF-8"?>',
-        '<root>', '<foo>x</foo>', '<bar>y</bar>', '</root>'
-      ]
+      doc = new Document!
+      doc.node 'root'
+        .node 'foo', 'x' .parent!
+        .node 'bar', 'y'
+      expected = doc.to-string!
       input = root: { foo: 'x', bar: 'y' }
 
       o 'should return the right output', ->
         result = create-xml input, pretty: true
-        _.each expected, -> result.should.contain(it)
+        result.should.equal expected
 
     describe 'with complex nested objects', ->
-      expected = [
-        '<?xml version="1.0" encoding="UTF-8"?>',
-        '<root>', '<foo>', '<bar>y</bar>', '</root>', '</foo>'
-      ]
+      doc = new Document!
+      doc.node 'root'
+        .node 'foo'
+          .node 'bar', 'y'
+      expected = doc.to-string!
       input = root: { foo: { bar: 'y' }  }
 
       o 'should return the right output', ->
         result = create-xml input, pretty: true
-        _.each expected, -> result.should.contain(it)
+        result.should.equal expected
+
+    describe 'with objects containing the $attr key', ->
+      doc = new Document!
+      doc.node 'root' 
+        .node 'foo' .attr 'params', 'are hell'
+          .node 'bar', 'y'
+      expected = doc.to-string!
+      input = root: foo: {$attr: {params: 'are hell'}, bar: 'y'}
+
+      o 'should return the right output', ->
+        result = create-xml input, pretty: true
+        result.should.equal expected
