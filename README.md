@@ -1,6 +1,10 @@
-# create-xml-pure [![Build Status](https://secure.travis-ci.org/yamadapc/create-xml-ls.png?branch=master)](http://travis-ci.org/yamadapc/create-xml-ls)
+# create-xml-ls [![Build Status](https://secure.travis-ci.org/yamadapc/create-xml-ls.png?branch=master)](http://travis-ci.org/yamadapc/create-xml-ls)
 
 Another JS object to XML converter
+
+## Instalation
+
+```npm install create-xml-ls```
 
 ## Example
 
