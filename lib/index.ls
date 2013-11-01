@@ -25,8 +25,7 @@ create-xml = (obj, options) ->
   if (_.size _.keys obj) > 1
     throw new Error 'There must be only one root element'
 
-  xml-declaration = options?xml-declaration
-  xml-doc = new Document declaration?version, declaration?encoding
+  xml-doc = new Document options?version, options?encoding
 
   _.reduce obj, set-node, xml-doc
   xml-doc.to-string(options?pretty or false)
