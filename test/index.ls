@@ -54,3 +54,15 @@ describe 'create-xml', ->
       o 'should return the right output', ->
         result = create-xml input, pretty: true
         result.should.equal expected
+
+    describe 'with objects containing a custom attributes key', ->
+      doc = new Document!
+      doc.node 'root' 
+        .node 'foo' .attr 'params', 'are hell'
+          .node 'bar', 'y'
+      expected = doc.to-string!
+      input = root: foo: {attributes: {params: 'are hell'}, bar: 'y'}
+
+      o 'should return the right output', ->
+        result = create-xml input, pretty: true, attributesKey: 'attributes'
+        result.should.equal expected
