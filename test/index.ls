@@ -66,3 +66,29 @@ describe 'create-xml', ->
       o 'should return the right output', ->
         result = create-xml input, pretty: true, attributesKey: 'attributes'
         result.should.equal expected
+
+    describe 'with objects with falsy properties', ->
+      describe 'without passing the \'compact\' option', ->
+        doc = new Document!
+        doc.node 'root',
+          .node 'foo', 'x' .parent!
+          .node 'bar', undefined
+        expected = doc.to-string!
+        input = root: {foo: 'x', bar: undefined}
+
+        o 'should consider the undefined properties', ->
+          result = create-xml input, pretty: true
+          result.should.equal expected
+
+      describe 'passing the compact option', ->
+        doc = new Document!
+        doc.node 'root'
+          .node 'foo'
+            .node 'star', 'x' .parent!
+            .node 'idk', 'y'
+        expected = doc.to-string!
+        input = root: foo: star: 'x', idk: 'y'
+
+        o 'should ignore the undefined properties', ->
+          result = create-xml input, pretty: true, compact: true
+          result.should.equal expected

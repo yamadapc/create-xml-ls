@@ -40,7 +40,23 @@ create-xml = (obj, options) ->
 
   xml-doc = new Document options?version, options?encoding
 
+  if options?compact
+  then obj = objCompact obj
+
   _.reduce obj, (set-node options), xml-doc
   xml-doc.to-string(options?pretty or false)
+
+##
+# objCompact :: Object -> Object
+#
+# Returns a deep copy of the object, without its falsy properties
+#
+objCompact = (obj) ->
+  _.reduce obj, ((memo, value, key) ->
+    if value instanceof Object then memo[key] = objCompact value
+    if value then memo[key] = value
+    memo
+  ), {}
+
 
 module.exports = create-xml
