@@ -18,14 +18,16 @@ _ = require \underscore
 # respective tag's attributes will be unpacked from this property
 #
 set-node = (options, root, value, key) -->
-  new-root = root.node key, value
+  if value instanceof Array
+    _.each value, (set-node options, root, _, key)
+  else
+    new-root = root.node key, value
+    if attr = delete value?[options?attributesKey or '$attr']
+      _.each attr, (value, param) ->
+        new-root.attr param, value
 
-  if attr = delete value?[options?attributesKey or '$attr']
-    _.each attr, (value, param) ->
-      new-root.attr param, value
-
-  if value instanceof Object
-    _.each value, (set-node options, new-root)
+    if value instanceof Object
+      _.each value, (set-node options, new-root)
 
   root
 

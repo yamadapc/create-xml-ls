@@ -43,6 +43,20 @@ describe 'create-xml', ->
         result = create-xml input, pretty: true
         result.should.equal expected
 
+    describe 'with objects containing arrays', ->
+      doc = new Document!
+      doc.node 'root'
+        .node 'foo'
+          .node 'bar', 'y' .parent!
+          .node 'bar', 'w' .parent!
+          .node 'bar', 'z' .parent!
+      expected = doc.to-string!
+      input = root: { foo: { bar: ['y', 'w', 'z'] } }
+
+      o 'should return the right output', ->
+        result = create-xml input, pretty: true
+        result.should.equal expected
+
     describe 'with objects containing the $attr key', ->
       doc = new Document!
       doc.node 'root' 
