@@ -1,6 +1,6 @@
 {
     "name":         "create-xml-ls",
-    "version":      "0.0.6",
+    "version":      "0.0.7",
     "description":  "Another JS object to XML converter",
     "author":       "Pedro Tacla Yamada <tacla.yamada@gmail.com>",
     "main":         "./pub/index",
@@ -19,9 +19,9 @@
     },
 
     "dependencies": {
-        "LiveScript": "latest",
-        "underscore": "latest",
-        "libxmljs": "latest"
+        "LiveScript": "1.2.0",
+        "underscore": "1.5.2",
+        "libxmljs": "0.8.1"
     },
 
     "devDependencies": {
