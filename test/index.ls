@@ -101,7 +101,7 @@ describe 'create-xml', ->
             .node 'star', 'x' .parent!
             .node 'idk', 'y'
         expected = doc.to-string!
-        input = root: foo: star: 'x', idk: 'y'
+        input = root: foo: star: 'x', idk: 'y', something: undefined
 
         o 'should ignore the undefined properties', ->
           result = create-xml input, pretty: true, compact: true

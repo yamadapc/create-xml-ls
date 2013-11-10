@@ -55,10 +55,9 @@ create-xml = (obj, options) ->
 #
 objCompact = (obj) ->
   _.reduce obj, ((memo, value, key) ->
-    if value instanceof Object then memo[key] = objCompact value
-    if value then memo[key] = value
+    if      _.isObject value then memo[key] = objCompact value
+    else if !!value          then memo[key] = value
     memo
   ), {}
-
 
 module.exports = create-xml
