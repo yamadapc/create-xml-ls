@@ -21,7 +21,9 @@ set-node = (options, root, value, key) -->
   if value instanceof Array
     _.each value, (set-node options, root, _, key)
   else
-    new-root = root.node key, value
+    content = (value?_ and delete value?_) or value
+    new-root = root.node key, content
+
     if attr = delete value?[options?attributesKey or '$attr']
       _.each attr, (value, param) ->
         new-root.attr param, value
