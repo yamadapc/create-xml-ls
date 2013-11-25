@@ -106,3 +106,14 @@ describe 'create-xml', ->
         o 'should ignore the undefined properties', ->
           result = create-xml input, pretty: true, compact: true
           result.should.equal expected
+
+    describe 'with objects with primitive value attributes', ->
+      doc = new Document!
+      doc.node 'root'
+        .node 'foo', 'content' .attr 'params', 'are funny'
+      expected = doc.to-string!
+      input = root: {foo: {_: 'content', $attr: { params: 'are funny'}}}
+
+      o 'should return the right output', ->
+        result = create-xml input, pretty: true
+        result.should.equal expected
