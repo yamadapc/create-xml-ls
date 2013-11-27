@@ -3,6 +3,9 @@
 
 Another JS object to XML converter
 
+*Today, only node 0.10 is supported due to a build fail of libxmljs in node
+0.11*
+
 ## Instalation
 
 ```npm install create-xml-ls```
