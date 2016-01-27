@@ -1,10 +1,9 @@
 {
-    "name":         "create-xml-ls",
-    "version":      "0.0.9",
-    "description":  "Another JS object to XML converter",
-    "author":       "Pedro Tacla Yamada <tacla.yamada@gmail.com>",
-    "main":         "./pub/index",
-
+    "name": "create-xml-ls",
+    "version": "0.0.9",
+    "description": "Another JS object to XML converter",
+    "author": "Pedro Tacla Yamada <tacla.yamada@gmail.com>",
+    "main": "./pub/index",
     "scripts": {
         "cc": "lsc -b -o pub -c lib/*.ls",
         "test-cc": "lsc -b -o pub-test -c test/*.ls",
@@ -12,20 +11,17 @@
         "prepublish": "npm run-script cc",
         "postinstall": "npm run-script cc"
     },
-
     "repository": {
         "type": "git",
         "url": "git://github.com/yamadapc/create-xml-ls.git"
     },
-
     "dependencies": {
         "LiveScript": "1.2.0",
         "underscore": "1.5.2",
         "libxmljs": "0.8.1"
     },
-
     "devDependencies": {
-        "mocha": ">= 1.4.1",
+        "mocha": ">=2.4.4",
         "should": "latest"
     }
 }
